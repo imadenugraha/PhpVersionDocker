@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+
+  nginx:
+    build: ./nginx/
+    volumes:
+      - ./php:/var/www/html:ro
+    ports:
+      - "8000:80"
+    links:
+      - "php"
+    container_name: nginx-container
+
+  php:
+    image: php:8.0-fpm
+    volumes:
+      - ./php:/var/www/html:ro
+    expose:
+      - 9000
+    container_name: php-container
